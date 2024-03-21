@@ -12,14 +12,15 @@
 
 ## 如何快速启动
 
-创建一个install.sh
+本地已有docker / docker compose / git 环境可以快速启动
 
 ```
 git clone -b final_project https://github.com/FrenkyOHOHOH/CTFd-fr3nky.git --depth=1
+git clone https://github.com/FrenkyOHOHOH/ctfd-whale CTFd-fr3nky/CTFd/plugins/ctfd-whale --depth=1
 cd CTFd-fr3nky
 docker swarm init
 docker node update --label-add='name=linux-1' $(docker node ls -q)
-docker compose up -d
-
+docker compose up -d --build
+docker compose exec ctfd python manage.py
 ```
 
