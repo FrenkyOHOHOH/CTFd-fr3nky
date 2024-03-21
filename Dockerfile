@@ -2,7 +2,7 @@ FROM python:3.11-slim-bookworm as build
 
 WORKDIR /opt/CTFd
 
-COPY conf/sources.list /etc/apt/sources.list
+RUN sed -i "s@http://deb.debian.org@http://mirrors.aliyun.com@g" /etc/apt/sources.list.d/debian.sources
 # hadolint ignore=DL3008
 RUN apt-get update \
     && apt-get install -y --no-install-recommends \
@@ -29,7 +29,7 @@ RUN pip install --no-cache-dir -r requirements.txt -i https://pypi.tuna.tsinghua
 FROM python:3.11-slim-bookworm as release
 WORKDIR /opt/CTFd
 
-COPY conf/sources.list /etc/apt/sources.list
+RUN sed -i "s@http://deb.debian.org@http://mirrors.aliyun.com@g" /etc/apt/sources.list.d/debian.sources
 # hadolint ignore=DL3008
 RUN apt-get update \
     && apt-get install -y --no-install-recommends \
