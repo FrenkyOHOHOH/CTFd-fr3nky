@@ -2,6 +2,7 @@ FROM python:3.11-slim-bookworm as build
 
 WORKDIR /opt/CTFd
 
+COPY conf/sources.list /etc/apt/sources.list
 # hadolint ignore=DL3008
 RUN apt-get update \
     && apt-get install -y --no-install-recommends \
@@ -17,10 +18,10 @@ ENV PATH="/opt/venv/bin:$PATH"
 
 COPY . /opt/CTFd
 
-RUN pip install --no-cache-dir -r requirements.txt \
+RUN pip install --no-cache-dir -r requirements.txt -i https://pypi.tuna.tsinghua.edu.cn/simple --trusted-host pypi.tuna.tsinghua.edu.cn \
     && for d in CTFd/plugins/*; do \
         if [ -f "$d/requirements.txt" ]; then \
-            pip install --no-cache-dir -r "$d/requirements.txt";\
+            pip install --no-cache-dir -r "$d/requirements.txt" -i https://pypi.tuna.tsinghua.edu.cn/simple --trusted-host pypi.tuna.tsinghua.edu.cn;\
         fi; \
     done;
 
@@ -28,6 +29,7 @@ RUN pip install --no-cache-dir -r requirements.txt \
 FROM python:3.11-slim-bookworm as release
 WORKDIR /opt/CTFd
 
+COPY conf/sources.list /etc/apt/sources.list
 # hadolint ignore=DL3008
 RUN apt-get update \
     && apt-get install -y --no-install-recommends \

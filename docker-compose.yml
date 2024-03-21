@@ -1,4 +1,4 @@
-version: '2'
+version: '3'
 
 services:
   ctfd:
@@ -20,11 +20,14 @@ services:
       - .data/CTFd/logs:/var/log/CTFd
       - .data/CTFd/uploads:/var/uploads
       - .:/opt/CTFd:ro
+      - /var/run/docker.sock:/var/run/docker.sock
     depends_on:
       - db
     networks:
         default:
         internal:
+        frp_connect:
+          ipv4_address: 172.1.0.5
 
   nginx:
     image: nginx:stable
@@ -58,8 +61,55 @@ services:
     - .data/redis:/data
     networks:
         internal:
+  frps:
+    image: glzjin/frp
+    restart: always
+    volumes:
+      - ./conf/frp:/conf
+    entrypoint:
+      - /usr/local/bin/frps
+      - -c
+      - /conf/frps.ini
+    ports:
+      - 10000-10100:10000-10100  # 映射direct类型题目的端口
+      - 9123:9123  # 映射http类型题目的端口
+    networks:
+      default:
+      frp_connect:
+        ipv4_address: 172.1.0.3
+  
+  frpc:
+    image: glzjin/frp:latest
+    restart: always
+    volumes:
+      - ./conf/frp:/conf/
+    entrypoint:
+      - /usr/local/bin/frpc
+      - -c
+      - /conf/frpc.ini
+    depends_on:
+      - frps
+    networks:
+      frp_containers:
+      frp_connect:
+        ipv4_address: 172.1.0.4
+
 
 networks:
-    default:
-    internal:
-        internal: true
+  default:
+  internal:
+    internal: true
+  frp_connect:
+    driver: overlay
+    internal: true
+    attachable: true
+    ipam:
+      config:
+        - subnet: 172.1.0.0/16
+  frp_containers:
+    driver: overlay
+    internal: true  # 如果允许题目容器访问外网，则可以去掉
+    attachable: true
+    ipam:
+      config:
+        - subnet: 172.2.0.0/16
