@@ -71,8 +71,8 @@ services:
       - -c
       - /conf/frps.ini
     ports:
-      - 9125-9129:9125-9129  # 映射direct类型题目的端口
-      - 9123:9123  # 映射http类型题目的端口
+      - 10000-10100:10000-10100  # 映射direct类型题目的端口
+      - 8080:8080  # 映射http类型题目的端口
     networks:
       default:
       frp_connect:
