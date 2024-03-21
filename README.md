@@ -8,7 +8,7 @@
 
 基于3.7.0版本的[CTFd](https://github.com/CTFd/CTFd)定制，修改了Dockerfile，进行了换源操作，更适合在中国大陆的网络环境下部署，添加了[CTFd-Whale](https://github.com/FrenkyOHOHOH/ctfd-whale)插件，更适合用来搭建动态靶机，修改了docker-compose.yml，配置了动态靶机所需插件的启动环境，可以通过docker compose一键部署，以及针对Web题型和纯ip部署进行了一些优化，避免了繁琐的配置，当然也可以参照下面教程来手动配置
 
-### 太长不看~~（快速部署）~~
+### 太长不看（快速部署）
 
 本地已有docker / docker compose / git 环境可以快速启动，使用下面的指令快速启动
 
