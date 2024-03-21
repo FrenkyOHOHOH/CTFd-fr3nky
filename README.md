@@ -13,7 +13,7 @@
 本地已有docker / docker compose / git 环境可以快速启动，使用下面的指令快速启动
 
 ```
-curl -fsSL https://github.com/FrenkyOHOHOH/CTFd-fr3nky/raw/final_project/deploy.sh -o deploy.sh
+curl -fsSL https://raw.githubusercontent.com/FrenkyOHOHOH/CTFd-fr3nky/final_project/deploy.sh -o deploy.sh
 chmod +x deploy.sh
 ./deploy.sh
 ```
