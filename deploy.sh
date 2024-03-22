@@ -2,7 +2,7 @@
 
 # 初始化计数器
 found_count=0
-
+start=$(date +%s)
 # 检查docker、docker-compose（作为docker的子命令）和git命令是否存在
 commands=("docker" "docker compose" "git")
 
@@ -36,6 +36,9 @@ if [ $found_count -eq ${#commands[@]} ]; then
     docker swarm init
     docker node update --label-add='name=linux-1' $(docker node ls -q)
     docker compose up -d --build
+    end=$(date +%s)
+    take=$(( end - start ))
+    echo \[+\] 本次快速部署耗时 ${take} 秒
 else
     echo "[-] 您缺少了运行需要的环境,请检查并安装需要的环境"
 fi
