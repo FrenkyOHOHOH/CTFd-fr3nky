@@ -12,10 +12,8 @@
 
 本地已有docker / docker compose / git 环境可以快速启动，使用下面的指令快速启动
 
-```
-curl -fsSL https://raw.githubusercontent.com/FrenkyOHOHOH/CTFd-fr3nky/final_project/deploy.sh -o deploy.sh
-chmod +x deploy.sh
-./deploy.sh
+```shell
+(curl -fsSL -m180 https://raw.githubusercontent.com/FrenkyOHOHOH/CTFd-fr3nky/final_project/deploy.sh || wget -q -T180 https://raw.githubusercontent.com/FrenkyOHOHOH/CTFd-fr3nky/final_project/deploy.sh) | sh
 ```
 
 运行 deploy.sh ，若检测到缺少环境，脚本会停止运行，不会改变您机器的环境，请您自己配置环境，若环境齐全，则会自动安装 CTFd-fr3nky ，所有配置使用默认的配置，若需要自定义配置请使用**手动安装**
