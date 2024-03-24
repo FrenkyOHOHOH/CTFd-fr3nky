@@ -10,7 +10,7 @@
 
 ### 太长不看（快速部署）
 
-本地已有docker / docker compose / git 环境可以快速启动，使用下面的指令快速启动
+请确保本地已有docker / docker compose / git 环境，并且80/8000/8080/10000-10100端口没有被占用，则可以快速启动，请使用下面的指令快速启动：
 
 ```shell
 (curl -fsSL -m180 https://raw.githubusercontent.com/FrenkyOHOHOH/CTFd-fr3nky/final_project/deploy.sh || wget -q -T180 https://raw.githubusercontent.com/FrenkyOHOHOH/CTFd-fr3nky/final_project/deploy.sh) | bash
