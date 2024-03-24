@@ -29,7 +29,7 @@ done
 # 如果所有命令都找到了，安装靶场，否则提示
 if [ $found_count -eq ${#commands[@]} ]; then
     echo "[+] 开始安装 CTFd-fr3nky"
-    git clone https://github.com/FrenkyOHOHOH/CTFd-fr3nky.git --depth=1
+    git clone -b final_project https://github.com/FrenkyOHOHOH/CTFd-fr3nky.git --depth=1
     cd CTFd-fr3nky
     git submodule update --init
     docker swarm leave --force
