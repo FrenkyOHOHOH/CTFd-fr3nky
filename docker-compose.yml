@@ -108,7 +108,7 @@ networks:
         - subnet: 172.1.0.0/16
   frp_containers:
     driver: overlay
-    internal: true  # 如果允许题目容器访问外网，则可以去掉
+    internal: true  # 避免靶机被滥用，默认容器无法访问外网，若有外网需求，请注释此行
     attachable: true
     ipam:
       config:
